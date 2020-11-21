@@ -4,7 +4,7 @@ module Dingtalk
   class Request
     attr_reader :ssl_context, :http
 
-    def initialize(skip_verify_ssl=true)
+    def initialize(skip_verify_ssl = true)
       @http = HTTP.timeout(**Dingtalk.http_timeout_options)
       @ssl_context = OpenSSL::SSL::SSLContext.new
       @ssl_context.ssl_version = :TLSv1
@@ -19,7 +19,7 @@ module Dingtalk
     end
     alias delete get
 
-    def post(path, post_body, post_header={})
+    def post(path, post_body, post_header = {})
       request(path, post_header) do |url, header|
         Dingtalk.logger.info "payload: #{post_body}"
         params = header.delete(:params)
@@ -45,7 +45,7 @@ module Dingtalk
     private
 
     def request(path, header={}, &_block)
-      url = URI::join(API_BASE_URL, path)
+      url = URI.join(API_BASE_URL, path)
       Dingtalk.logger.info "request url(#{url}) with headers: #{header}"
       as = header.delete(:as)
       header['Accept'] = 'application/json'

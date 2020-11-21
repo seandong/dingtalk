@@ -80,14 +80,14 @@ module Dingtalk
     def app_token_store
       return @app_token_store if defined?(@app_token_store)
 
-      klass = isv ? TokenStore::IsvAppToken : TokenStore::AppToken
+      klass = isv ? Tokens::IsvAppToken : Tokens::AppToken
       @app_token_store = klass.new(self)
     end
 
     def tenant_token_store
       return @tenant_token_store if defined?(@tenant_token_store)
 
-      klass = isv ? TokenStore::IsvTenantToken : TokenStore::TenantToken
+      klass = isv ? Tokens::IsvTenantToken : Tokens::TenantToken
       @tenant_token_store = klass.new(self)
     end
 

@@ -1,5 +1,5 @@
 module Dingtalk
-  module TokenStore
+  module Tokens
     class Base
       attr_accessor :client
 
@@ -10,7 +10,7 @@ module Dingtalk
 
       def token
         update_token if expired?
-        redis.hget(redis_key, token_key)
+        redis.hget(redis_key, key)
       end
 
       def valid?
@@ -19,14 +19,14 @@ module Dingtalk
 
       def update_token
         data = fetch_token.data
-        value = data[token_key]
+        value = data[key]
         if value.nil?
           Dingtalk.logger.error "#{self.class.name} fetch token error: #{data.inspect}"
         else
-          expires_at = Time.now.to_i + data['expire'].to_i - 120
+          expires_at = Time.now.to_i + data['expires_in'].to_i - 120
           redis.hmset(
             redis_key,
-            token_key, value,
+            key, value,
             'expires_at', expires_at
           )
           redis.expireat(redis_key, expires_at)
@@ -41,16 +41,16 @@ module Dingtalk
         raise NotImplementedError
       end
 
-      def token_key
+      def key
+        'access_token'
+      end
+
+      def redis_key
         raise NotImplementedError
       end
 
       def redis
         Dingtalk.redis
-      end
-
-      def redis_key
-        @redis_key ||= Digest::MD5.hexdigest "#{self.class.name}_#{client.app_id}_#{client.app_secret}"
       end
 
       def expired?

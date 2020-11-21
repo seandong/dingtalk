@@ -1,6 +1,8 @@
 require 'logger'
 
 module Dingtalk
+  API_BASE_URL = 'https://oapi.dingtalk.com/'.freeze
+
   class << self
     def configure
       yield config

@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
-require "dingtalk"
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
+require 'dingtalk'
 
-require "minitest/autorun"
+require 'minitest/autorun'
