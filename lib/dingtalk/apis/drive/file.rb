@@ -1,4 +1,4 @@
-module Lark
+module Dingtalk
   module Apis
     module Drive
       module File

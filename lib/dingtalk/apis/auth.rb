@@ -1,4 +1,4 @@
-module Lark
+module Dingtalk
   module Apis
     module Auth
       def app_ticket_resend

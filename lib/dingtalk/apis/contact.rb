@@ -1,4 +1,4 @@
-module Lark
+module Dingtalk
   module Apis
     module Contact
       def scope_get

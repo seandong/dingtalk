@@ -1,11 +1,11 @@
 require 'http'
 
-module Lark
+module Dingtalk
   class Request
     attr_reader :ssl_context, :http
 
     def initialize(skip_verify_ssl=true)
-      @http = HTTP.timeout(**Lark.http_timeout_options)
+      @http = HTTP.timeout(**Dingtalk.http_timeout_options)
       @ssl_context = OpenSSL::SSL::SSLContext.new
       @ssl_context.ssl_version = :TLSv1
       @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_NONE if skip_verify_ssl
@@ -21,7 +21,7 @@ module Lark
 
     def post(path, post_body, post_header={})
       request(path, post_header) do |url, header|
-        Lark.logger.info "payload: #{post_body}"
+        Dingtalk.logger.info "payload: #{post_body}"
         params = header.delete(:params)
         http.headers(header).post(url, params: params, json: post_body, ssl_context: ssl_context)
       end
@@ -46,12 +46,12 @@ module Lark
 
     def request(path, header={}, &_block)
       url = URI::join(API_BASE_URL, path)
-      Lark.logger.info "request url(#{url}) with headers: #{header}"
+      Dingtalk.logger.info "request url(#{url}) with headers: #{header}"
       as = header.delete(:as)
       header['Accept'] = 'application/json'
       response = yield(url, header)
       unless response.status.success?
-        Lark.logger.error "request #{url} happen error: #{response.body}"
+        Dingtalk.logger.error "request #{url} happen error: #{response.body}"
         raise ResponseError.new(response.status, response.body)
       end
       handle_response(response, as || :json)
@@ -76,10 +76,10 @@ module Lark
     end
 
     def parse_as_json(body)
-      Lark.logger.info "response body: #{body}"
+      Dingtalk.logger.info "response body: #{body}"
       data = JSON.parse body.to_s
       result = Result.new(data)
-      raise ::Lark::AccessTokenExpiredError if [99991663, 99991664].include?(result.code)
+      raise ::Dingtalk::AccessTokenExpiredError if [99991663, 99991664].include?(result.code)
       result
     end
 

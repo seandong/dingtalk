@@ -1,4 +1,4 @@
-module Lark
+module Dingtalk
   module TokenStore
     class Base
       attr_accessor :client
@@ -21,7 +21,7 @@ module Lark
         data = fetch_token.data
         value = data[token_key]
         if value.nil?
-          Lark.logger.error "#{self.class.name} fetch token error: #{data.inspect}"
+          Dingtalk.logger.error "#{self.class.name} fetch token error: #{data.inspect}"
         else
           expires_at = Time.now.to_i + data['expire'].to_i - 120
           redis.hmset(
@@ -46,7 +46,7 @@ module Lark
       end
 
       def redis
-        Lark.redis
+        Dingtalk.redis
       end
 
       def redis_key

@@ -1,4 +1,4 @@
-module Lark
+module Dingtalk
   module Apis
     module Mina
       def token_login_validate(code)

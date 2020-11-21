@@ -1,4 +1,4 @@
-module Lark
+module Dingtalk
   module Apis
     module Chat
       def members(user_access_token:, chat_id:, page_size: nil, page_token: nil)

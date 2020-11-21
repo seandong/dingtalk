@@ -1,6 +1,6 @@
-require 'lark/request'
+require 'dingtalk/request'
 
-module Lark
+module Dingtalk
   class Api
     include Helper
 
@@ -24,12 +24,12 @@ module Lark
     attr_reader :app_id, :app_secret, :tenant_key, :isv, :options
 
     def initialize options={}
-      @app_id = options.delete(:app_id) || Lark.config.default_app_id
-      @app_secret = options.delete(:app_secret) || Lark.config.default_app_secret
+      @app_id = options.delete(:app_id) || Dingtalk.config.default_app_id
+      @app_secret = options.delete(:app_secret) || Dingtalk.config.default_app_secret
       raise AppNotConfigException if @app_id.nil? || @app_id.empty?
 
       @tenant_key = options.delete(:tenant_key)
-      @isv = options.delete(:isv) || Lark.config.default_isv
+      @isv = options.delete(:isv) || Dingtalk.config.default_isv
       @options = options
     end
 
@@ -38,7 +38,7 @@ module Lark
     end
 
     def request
-      @request ||= Lark::Request.new(false)
+      @request ||= Dingtalk::Request.new(false)
     end
 
     def get(path, headers={})
@@ -60,11 +60,11 @@ module Lark
     end
 
     def app_ticket= ticket
-      Lark.redis.set "APP_TICKET_#{app_id}", ticket
+      Dingtalk.redis.set "APP_TICKET_#{app_id}", ticket
     end
 
     def app_ticket
-      Lark.redis.get "APP_TICKET_#{app_id}"
+      Dingtalk.redis.get "APP_TICKET_#{app_id}"
     end
 
     def app_access_token
@@ -106,9 +106,9 @@ module Lark
     class << self
       def default
         @default ||= new(
-          app_id: Lark.config.default_app_id,
-          app_secret: Lark.config.default_app_secret,
-          isv: Lark.config.default_isv
+          app_id: Dingtalk.config.default_app_id,
+          app_secret: Dingtalk.config.default_app_secret,
+          isv: Dingtalk.config.default_isv
         )
       end
     end

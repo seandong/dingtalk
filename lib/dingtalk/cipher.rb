@@ -1,7 +1,7 @@
 require 'openssl/cipher'
 require 'base64'
 
-module Lark
+module Dingtalk
   class Cipher
     attr_reader :key
 

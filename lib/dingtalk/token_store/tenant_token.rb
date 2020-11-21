@@ -1,6 +1,6 @@
-require 'lark/token_store/base'
+require 'dingtalk/token_store/base'
 
-module Lark
+module Dingtalk
   module TokenStore
     class TenantToken < Base
       def token_key

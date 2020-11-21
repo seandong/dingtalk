@@ -1,6 +1,6 @@
 require "erb"
 
-module Lark
+module Dingtalk
   module Apis
     module Authen
       def index(redirect_uri, state)

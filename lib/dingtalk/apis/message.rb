@@ -1,4 +1,4 @@
-module Lark
+module Dingtalk
   module Apis
     module Message
       def batch_send(payload)

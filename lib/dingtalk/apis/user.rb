@@ -1,4 +1,4 @@
-module Lark
+module Dingtalk
   module Apis
     module User
       def group_list(user_access_token:, page_size: nil, page_token: nil)

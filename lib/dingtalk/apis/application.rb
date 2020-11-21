@@ -1,4 +1,4 @@
-module Lark
+module Dingtalk
   module Apis
     module Application
       def app_admin_user_list

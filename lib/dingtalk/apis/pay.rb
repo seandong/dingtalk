@@ -1,4 +1,4 @@
-module Lark
+module Dingtalk
   module Apis
     module Pay
       def paid_scope_check_user(open_id: nil, user_id: nil)

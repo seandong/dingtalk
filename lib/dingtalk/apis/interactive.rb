@@ -1,4 +1,4 @@
-module Lark
+module Dingtalk
   module Apis
     module Interactive
       def card_update(token:, card:)

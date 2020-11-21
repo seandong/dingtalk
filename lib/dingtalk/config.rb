@@ -1,6 +1,6 @@
 require 'logger'
 
-module Lark
+module Dingtalk
   class << self
     def configure
       yield config
@@ -15,15 +15,17 @@ module Lark
     end
 
     def logger
-      @logger ||= if config.logger.nil?
-                    defined?(Rails) && Rails.logger ? Rails.logger : Logger.new(STDOUT)
-                  else
-                    config.logger
-                  end
+      return @logger if defined?(@logger)
+
+      @logger = if defined?(Rails) && Rails.logger
+                  Rails.logger
+                else
+                  Logger.new(STDOUT)
+                end
     end
 
     def http_timeout_options
-      config.http_timeout_options || {write: 2, connect: 5, read: 10}
+      config.http_timeout_options || { write: 2, connect: 5, read: 10 }
     end
   end
 
