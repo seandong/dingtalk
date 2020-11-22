@@ -12,7 +12,7 @@ module Dingtalk
       end
 
       def fetch_token
-        client.post 'service/get_jsapi_ticket'
+        client.get 'get_jsapi_ticket'
       end
     end
   end

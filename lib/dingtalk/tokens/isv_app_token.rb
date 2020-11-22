@@ -19,11 +19,7 @@ module Dingtalk
         #   "#{timestamp}\n#{client.suite_ticket}"
         # )
         # signature = ERB::Util.url_encode Base64.encode64(sign_str).strip
-        client.request.post 'service/get_corp_token', {
-          auth_corpid: client.corpid
-        }, params: {
-          suite_access_token: client.suite.access_token
-        }
+        client.suite.service.get_corp_token(client.corpid)
       end
     end
   end

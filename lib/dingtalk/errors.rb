@@ -2,8 +2,9 @@ module Dingtalk
   # Exceptions
   class RedisNotConfigException < RuntimeError; end
   class MissingParameterException < RuntimeError; end
-  class AccessTokensExpiredError < RuntimeError; end
+  class AccessTokenExpiredError < RuntimeError; end
   class ResultErrorException < RuntimeError; end
+  class CorpidNotMatchException < RuntimeError; end
 
   class ResponseError < StandardError
     attr_reader :error_code
