@@ -1,13 +1,13 @@
-[![Gem Version](https://badge.fury.io/rb/lark-sdk.svg)](https://badge.fury.io/rb/lark-sdk)
+[![Gem Version](https://badge.fury.io/rb/dingtalk-sdk.svg)](https://badge.fury.io/rb/dingtalk-sdk)
 
-> Ruby SDKs for Lark(飞书) API https://open.feishu.cn/
+> Ruby SDKs for Dingtalk(钉钉) API https://open.dingtalk.com/
 
 ## 安装
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'lark-sdk'
+gem 'dingtalk-sdk'
 ```
 
 And then execute:
@@ -16,51 +16,63 @@ And then execute:
 
 Or install it yourself as:
 
-	$ gem install lark-sdk
+	$ gem install dingtalk-sdk
 
-	require 'lark/sdk'
+	require 'dingtalk/sdk'
 
-## 使用
+## 使用说明
 
-初始化：
+### 初始化 SDK
 
 ```ruby
-# config/initializers/lark.rb
+# config/initializers/dingtalk.rb
 
-Lark.configure do |config|
-  config.redis = Redis.new(url: 'redis://127.0.0.1:6379/1')
-  config.default_app_id = 'xxx'       # 应用 app ID
-  config.default_app_secret = 'xxx'   # 应用 app secret
-  config.default_isv = true           # 自建应用: false, 应用商店应用: true
+Dingtalk.configure do |config|
+  config.redis = Redis.new
   # ...
 end
 ```
 
-实例化 API：
+### HTTP 回调
+
+> 回调数据签名和解密：
 
 ```ruby
-api = Lark::Api.new(
-	app_id: 'xxx',        # default: Lark.config.default_app_id
-	app_secret: 'xxx',    # default: Lark.config.default_app_secret
-	isv: false/true,      # default: Lark.config.default_app_secret
-	tenant_key: 'xxx'     # required while internal app
+# 实例化回调对象
+callback = Dingtalk::Callback.new(
+  encoding_aes_key: encoding_aes_key,
+  token: token,
+  corpid: corpid # 第三方应用使用 SuiteKey
+)
+
+# 数据解密
+callback.decrypt(encrypt_str)
+
+# 返回数据签名
+callback.encrypt(message)
+```
+
+### 实例化套件 (suite)
+
+```ruby
+suite = Dingtalk::Client::Suite.new(
+  suite_id: suite_id,
+  app_id: app_id,
+  suite_key: suite_key,
+  suite_secret: suite_secret
 )
 ```
 
-加/解密：
+### 实例化第三方企业应用
 
 ```ruby
-
-cipher = Lark::Cipher.new(encrypt_key)
-
-# 解密
-cipher.decrypt(message)
-
-# 加密
-cipher.encrypt(message)
+app = suite.isv_app(corpid: corpid, agent_id: agent_id)
 ```
 
-[Api 列表](https://github.com/mycolorway/lark-ruby-sdk/wiki/API-List)
+## API 列表
+
+
+[Api 列表](https://github.com/mycolorway/dingtalk-ruby-sdk/wiki/API-List)
 
 
 ## 贡献

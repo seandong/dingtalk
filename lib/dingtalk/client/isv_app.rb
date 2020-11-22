@@ -5,11 +5,12 @@ module Dingtalk
     class IsvApp < Base
       attr_reader :corpid, :suite
 
-      delegate :app_id, :suite_id, :suite_key, :suite_secret, :suite_ticket, to: :suite
+      delegate :agent_id, :app_id, :suite_id, :suite_key, :suite_secret, :suite_ticket, to: :suite
 
       def initialize(options = {})
         super
         init_attrs :corpid, :suite
+        @agent_id = options[:agent_id]
       end
 
       def access_token

@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Dingtalk(钉钉) API SDKs for ruby'
   spec.description   = 'Dingtalk(钉钉) API SDKs for ruby https://open.dingtalk.com/'
-  spec.homepage      = 'https://github.com/seandong/lark-dintalk-sdk'
+  spec.homepage      = 'https://github.com/seandong/dintalk'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
 
