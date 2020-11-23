@@ -3,10 +3,6 @@ require 'dingtalk/tokens/base'
 module Dingtalk
   module Tokens
     class IsvAppToken < Base
-      def key
-        'access_token'
-      end
-
       def redis_key
         @redis_key ||= Digest::MD5.hexdigest "#{self.class.name}_#{client.corpid}_#{client.app_id}"
       end

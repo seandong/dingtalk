@@ -63,14 +63,45 @@ suite = Dingtalk::Client::Suite.new(
 )
 ```
 
-### 实例化第三方企业应用
+更新 `suite_ticket`
 
 ```ruby
+suite.suite_ticket = xxx
+```
+
+### 实例化应用
+
+
+#### 第三方应用
+
+```ruby
+app = Dingtalk::Client::IsvApp.new(
+	agent_id: agent_id,
+	corpid: corpid,
+	suite: suite # 套件对象
+)
+
+# 或者通过套件实例化
 app = suite.isv_app(corpid: corpid, agent_id: agent_id)
 ```
 
-## API 列表
+#### 企业内部应用
 
+```ruby
+app = Dingtalk::Client::CorpApp.new(
+  app_key: app_key,
+  app_secret: app_secret,
+  agent_id: agent_id
+)
+```
+
+#### 获取 `jsapi_ticket`
+
+```ruby
+app.jsapi_ticket
+```
+
+## API 列表
 
 [Api 列表](https://github.com/mycolorway/dingtalk-ruby-sdk/wiki/API-List)
 
