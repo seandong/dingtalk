@@ -3,6 +3,10 @@ require 'dingtalk/client/base'
 module Dingtalk
   module Client
     class CorpApp < Base
+      api_mount :auth
+      api_mount :user
+      api_mount :microapp
+
       attr_reader :app_key, :app_secret, :agent_id
 
       def initialize(options = {})
@@ -16,6 +20,10 @@ module Dingtalk
 
       def jsapi_ticket
         jsapi_ticket_store.token
+      end
+
+      def app_id
+        app_key
       end
 
       private

@@ -4,7 +4,7 @@ module Dingtalk
   module Tokens
     class CorpAppToken < Base
       def redis_key
-        @redis_key ||= Digest::MD5.hexdigest "#{self.class.name}_#{client.app_key}_#{client.app_secret}"
+        @redis_key ||= Digest::MD5.hexdigest "#{self.class.name}_#{client.app_key}"
       end
 
       def fetch_token

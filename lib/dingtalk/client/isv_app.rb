@@ -3,6 +3,9 @@ require 'dingtalk/client/base'
 module Dingtalk
   module Client
     class IsvApp < Base
+      api_mount :auth
+      api_mount :user
+
       attr_reader :corpid, :suite
 
       delegate :agent_id, :app_id, :suite_id, :suite_key, :suite_secret, :suite_ticket, to: :suite

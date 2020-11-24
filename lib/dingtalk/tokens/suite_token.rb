@@ -8,7 +8,7 @@ module Dingtalk
       end
 
       def redis_key
-        @redis_key ||= Digest::MD5.hexdigest "#{self.class.name}_#{client.suite_key}_#{client.suite_secret}"
+        @redis_key ||= Digest::MD5.hexdigest "#{self.class.name}_#{client.suite_key}"
       end
 
       def fetch_token

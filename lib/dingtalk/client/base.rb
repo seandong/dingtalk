@@ -3,6 +3,8 @@ require 'dingtalk/request'
 module Dingtalk
   module Client
     class Base
+      # api_mount :sso
+
       attr_reader :options
 
       def initialize(options = {})

@@ -1,13 +1,13 @@
 module Dingtalk
   module Api
     module Sso
-      def gettoken(isv_corpid, ssosecret)
+      def gettoken(corpid, ssosecret)
         # https://ding-doc.dingtalk.com/document#/isv-dev-guide/ydc8us
-        get 'sso/gettoken', params: { corpid: isv_corpid, corpsecret: ssosecret }
+        request.get 'sso/gettoken', params: { corpid: corpid, corpsecret: ssosecret }
       end
 
-      def getuserinfo(code, sso_access_token)
-        get 'sso/getuserinfo', params: { code: code, access_token: sso_access_token }
+      def getuserinfo(code, ssotoken)
+        request.get 'sso/getuserinfo', params: { code: code, access_token: ssotoken }
       end
     end
   end
