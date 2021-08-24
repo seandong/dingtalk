@@ -16,7 +16,7 @@ module Dingtalk
         post 'topapi/smartwork/hrm/employee/querydimission', { offset: offset, size: size }
       end
 
-      def listdimission(userid_list=[])
+      def listdimission(userid_list = [])
         # https://ding-doc.dingtalk.com/document#/isv-dev-guide/obtain-employee-turnover-information
         post 'topapi/smartwork/hrm/employee/listdimission', { userid_list: userid_list }
       end
