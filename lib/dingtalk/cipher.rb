@@ -13,15 +13,15 @@ module Dingtalk
 
     def encrypt(text)
       text = text.force_encoding('ASCII-8BIT')
-      random = SecureRandom.hex(8)
       msg_len = [text.length].pack('N')
-      text = encode "#{random}#{msg_len}#{text}#{key}"
-      Base64.encode64 cipher(:encrypt, aes_key, text)
+      text = encode "#{SecureRandom.hex(8)}#{msg_len}#{text}#{key}"
+      Base64.encode64 cipher(:encrypt, text)
     end
 
     def decrypt(text)
       text = Base64.decode64(text)
-      text = decode cipher(:decrypt, aes_key, text)
+      text = cipher(:decrypt, text)
+      text = decode text
       content = text[16...text.length]
       len_list = content[0...4].unpack('N')
       xml_len = len_list[0]
@@ -45,11 +45,11 @@ module Dingtalk
 
     private
 
-    def cipher(method_name, key, str)
+    def cipher(method_name, str)
       cipher = OpenSSL::Cipher.new(CIPHER)
       cipher.send method_name
       cipher.padding = 0
-      cipher.key = key
+      cipher.key = aes_key
       cipher.iv = key[0...16]
       cipher.update(str) + cipher.final
     end
