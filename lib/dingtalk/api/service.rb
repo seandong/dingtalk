@@ -8,6 +8,12 @@ module Dingtalk
         }
       end
 
+      def get_corp_token2(auth_corpid)
+        post "service/get_corp_token", {
+          auth_corpid: auth_corpid
+        }
+      end
+
       def get_auth_info(auth_corpid)
         request.post "service/get_auth_info?#{signature_query}", {
           suite_key: suite_key,
