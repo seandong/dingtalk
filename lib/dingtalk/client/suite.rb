@@ -38,6 +38,17 @@ module Dingtalk
       def token_store
         @token_store ||= Dingtalk::Tokens::SuiteToken.new(self)
       end
+
+      class << self
+        def default
+          @default ||= new(
+            suite_id: Dingtalk.config.default_suite_id,
+            app_id: Dingtalk.config.default_app_id,
+            suite_key: Dingtalk.config.default_suite_key,
+            suite_secret: Dingtalk.config.default_suite_secret
+          )
+        end
+      end
     end
   end
 end
