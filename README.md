@@ -40,9 +40,9 @@ end
 ```ruby
 # 实例化签名对象
 cipher = Dingtalk::Cipher.new(
-  encoding_aes_key: encoding_aes_key,
-  token: token,
-  corpid: corpid # 第三方应用使用 SuiteKey
+  aes_key: encoding_aes_key,      # 数据加密密钥
+  token: token,                   # Token
+  key: appKey/suiteKey            # 自建应用使用 appKey; 第三方应用使用 SuiteKey
 )
 
 # 数据解密

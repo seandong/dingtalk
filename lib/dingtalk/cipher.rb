@@ -3,19 +3,19 @@ module Dingtalk
     CIPHER = 'AES-256-CBC'.freeze
     BLOCK_SIZE = 32
 
-    attr_reader :corpid, :aes_key, :token
+    attr_reader :aes_key, :token, :key
 
-    def initialize(encoding_aes_key:, token:, corpid:)
-      @aes_key = Base64.decode64(encoding_aes_key + '=')
+    def initialize(aes_key:, token:, key:)
+      @aes_key = Base64.decode64(aes_key + '=')
       @token = token
-      @corpid = corpid
+      @key = key
     end
 
     def encrypt(text)
       text = text.force_encoding('ASCII-8BIT')
       random = SecureRandom.hex(8)
       msg_len = [text.length].pack('N')
-      str = encrypt_text "#{random}#{msg_len}#{text}#{corpid}"
+      str = encrypt_text "#{random}#{msg_len}#{text}#{key}"
       Base64.encode64(str)
     end
 
@@ -26,12 +26,7 @@ module Dingtalk
       len_list = content[0...4].unpack('N')
       xml_len = len_list[0]
       result = content[4...4 + xml_len]
-      decrypt_corpid = content[xml_len + 4...content.size]
-      unless decrypt_corpid == corpid
-        raise CorpidNotMatchException,
-              "decrypt corpid: #{decrypt_corpid}; current corpid: #{corpid}; result: #{result}"
-      end
-
+      # decrypt_corpid = content[xml_len + 4...content.size]
       result
     end
 
