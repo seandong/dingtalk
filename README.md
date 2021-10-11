@@ -48,8 +48,11 @@ cipher = Dingtalk::Cipher.new(
 # 数据解密
 cipher.decrypt(encrypt_str)
 
-# 返回数据签名
-cipher.encrypt(message)
+# 数据加密
+cipher.encrypt(text)
+
+# 返回签名数据包
+cipher.signature_package(text)
 ```
 
 ### 实例化套件 (suite)

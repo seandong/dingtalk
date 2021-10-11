@@ -30,6 +30,19 @@ module Dingtalk
       result
     end
 
+    def signature_package(text)
+      timestamp = Time.now.to_i.to_s
+      nonce = SecureRandom.hex
+      encrypted = encrypt(text)
+      sort_params = [token, timestamp, nonce, encrypted].sort.join
+      {
+        msg_signature: Digest::SHA1.hexdigest(sort_params),
+        encrypt: encrypted,
+        timeStamp: timestamp,
+        nonce: nonce
+      }
+    end
+
     private
 
     def decrypt_text(str)
