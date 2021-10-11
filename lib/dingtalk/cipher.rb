@@ -32,7 +32,7 @@ module Dingtalk
 
     def signature_package(text)
       timestamp = Time.now.to_i.to_s
-      nonce = SecureRandom.hex
+      nonce = SecureRandom.hex(4)
       encrypted = encrypt(text)
       sort_params = [token, timestamp, nonce, encrypted].sort.join
       {
