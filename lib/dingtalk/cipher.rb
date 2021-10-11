@@ -1,5 +1,5 @@
 module Dingtalk
-  class Callback
+  class Cipher
     CIPHER = 'AES-256-CBC'.freeze
     BLOCK_SIZE = 32
 

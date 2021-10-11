@@ -38,18 +38,18 @@ end
 > 回调数据签名和解密：
 
 ```ruby
-# 实例化回调对象
-callback = Dingtalk::Callback.new(
+# 实例化签名对象
+cipher = Dingtalk::Cipher.new(
   encoding_aes_key: encoding_aes_key,
   token: token,
   corpid: corpid # 第三方应用使用 SuiteKey
 )
 
 # 数据解密
-callback.decrypt(encrypt_str)
+cipher.decrypt(encrypt_str)
 
 # 返回数据签名
-callback.encrypt(message)
+cipher.encrypt(message)
 ```
 
 ### 实例化套件 (suite)
