@@ -15,13 +15,13 @@ module Dingtalk
       text = text.force_encoding('ASCII-8BIT')
       random = SecureRandom.hex(8)
       msg_len = [text.length].pack('N')
-      str = encrypt_text "#{random}#{msg_len}#{text}#{key}"
-      Base64.encode64(str)
+      text = encode "#{random}#{msg_len}#{text}#{key}"
+      Base64.encode64 cipher(:encrypt, aes_key, text)
     end
 
     def decrypt(text)
-      str = Base64.decode64(text)
-      text = decrypt_text(str)
+      text = Base64.decode64(text)
+      text = decode cipher(:decrypt, aes_key, text)
       content = text[16...text.length]
       len_list = content[0...4].unpack('N')
       xml_len = len_list[0]
@@ -45,23 +45,6 @@ module Dingtalk
 
     private
 
-    def decrypt_text(str)
-      text = cipher(:decrypt, aes_key, str)
-      pad = text[-1].ord
-      pad = 0 if pad < 1 || pad > BLOCK_SIZE
-      size = text.size - pad
-      text[0...size]
-    end
-
-    def encrypt_text(str)
-      # 计算需要填充的位数
-      amount_to_pad = BLOCK_SIZE - (str.length % BLOCK_SIZE)
-      amount_to_pad = BLOCK_SIZE if amount_to_pad.zero?
-      # 获得补位所用的字符
-      pad_chr = amount_to_pad.chr
-      cipher(:encrypt, token, "#{str}#{pad_chr * amount_to_pad}")
-    end
-
     def cipher(method_name, key, str)
       cipher = OpenSSL::Cipher.new(CIPHER)
       cipher.send method_name
@@ -69,6 +52,22 @@ module Dingtalk
       cipher.key = key
       cipher.iv = key[0...16]
       cipher.update(str) + cipher.final
+    end
+
+    def encode(text)
+      # 计算需要填充的位数
+      amount_to_pad = BLOCK_SIZE - (text.length % BLOCK_SIZE)
+      amount_to_pad = BLOCK_SIZE if amount_to_pad.zero?
+      # 获得补位所用的字符
+      pad_chr = amount_to_pad.chr
+      "#{text}#{pad_chr * amount_to_pad}"
+    end
+
+    def decode(text)
+      pad = text[-1].ord
+      pad = 0 if pad < 1 || pad > BLOCK_SIZE
+      size = text.size - pad
+      text[0...size]
     end
   end
 end
