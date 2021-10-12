@@ -21,6 +21,18 @@ module Dingtalk
         }
       end
 
+      def get_unactive_corp
+        get 'service/get_unactive_corp', params: {
+          app_id: app_id
+        }
+      end
+
+      def reauth_corp(corpid_list)
+        post 'service/reauth_corp', {
+          corpid_list: corpid_list
+        }
+      end
+
       # private
 
       # def signature_query
