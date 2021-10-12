@@ -25,8 +25,8 @@ module Dingtalk
         token_store.token
       end
 
-      def isv_app(corpid:)
-        Dingtalk::Client::IsvApp.new(suite: self, corpid: corpid)
+      def isv_app(corpid:, agent_id: nil)
+        Dingtalk::Client::IsvApp.new(suite: self, corpid: corpid, agent_id: agent_id)
       end
 
       private
