@@ -20,6 +20,7 @@ module Dingtalk
       api_mount :sso
       api_mount :user
       api_mount :workrecord
+      api_mount :jsapi
 
       attr_reader :corpid, :suite
 

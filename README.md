@@ -94,7 +94,8 @@ app = suite.isv_app(corpid: corpid, agent_id: agent_id)
 app = Dingtalk::Client::CorpApp.new(
   app_key: app_key,
   app_secret: app_secret,
-  agent_id: agent_id
+  agent_id: agent_id,
+  corpid: corpid
 )
 ```
 

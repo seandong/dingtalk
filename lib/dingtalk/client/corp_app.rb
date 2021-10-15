@@ -20,12 +20,13 @@ module Dingtalk
       api_mount :sso
       api_mount :user
       api_mount :workrecord
+      api_mount :jsapi
 
-      attr_reader :app_key, :app_secret, :agent_id
+      attr_reader :app_key, :app_secret, :agent_id, :corpid
 
       def initialize(options = {})
         super
-        init_attrs :app_key, :app_secret, :agent_id
+        init_attrs :app_key, :app_secret, :agent_id, :corpid
       end
 
       def access_token
