@@ -15,11 +15,11 @@ module Dingtalk
         # https://ding-doc.dingtalk.com/document#/org-dev-guide/send-work-notifications
         post 'topapi/message/corpconversation/asyncsend_v2', {
           agent_id: agent_id,
-          userid_list: userid_list,
-          dept_id_list: dept_id_list,
+          userid_list: userid_list.join(',').presence,
+          dept_id_list: dept_id_list.join(',').presence,
           to_all_user: to_all_user,
           msg: msg
-        }.merge(options)
+        }.compact.merge(options)
       end
 
       def corpconversation_getsendprogress(task_id)
