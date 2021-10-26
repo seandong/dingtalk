@@ -11,12 +11,12 @@ module Dingtalk
         }.compact
       end
 
-      def corpconversation_asyncsend_v2(msg:, userid_list: [], dept_id_list: [], to_all_user: false, options: {})
+      def corpconversation_asyncsend_v2(msg:, userid_list: nil, dept_id_list: nil, to_all_user: false, options: {})
         # https://ding-doc.dingtalk.com/document#/org-dev-guide/send-work-notifications
         post 'topapi/message/corpconversation/asyncsend_v2', {
           agent_id: agent_id,
-          userid_list: userid_list.join(',').presence,
-          dept_id_list: dept_id_list.join(',').presence,
+          userid_list: userid_list,
+          dept_id_list: dept_id_list,
           to_all_user: to_all_user,
           msg: msg
         }.compact.merge(options)
