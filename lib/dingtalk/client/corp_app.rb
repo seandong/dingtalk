@@ -43,6 +43,14 @@ module Dingtalk
 
       private
 
+      def sns_app_id
+        app_key
+      end
+
+      def sns_app_secret
+        app_secret
+      end
+
       def token_store
         @token_store ||= Dingtalk::Tokens::CorpAppToken.new(self)
       end

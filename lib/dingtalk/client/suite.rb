@@ -5,6 +5,7 @@ module Dingtalk
   module Client
     class Suite < Base
       api_mount :service
+      api_mount :sns
 
       attr_reader :suite_id, :app_id, :suite_key, :suite_secret
 
@@ -30,6 +31,14 @@ module Dingtalk
       end
 
       private
+
+      def sns_app_id
+        suite_key
+      end
+
+      def sns_app_secret
+        suite_secret
+      end
 
       def access_token_name
         'suite_access_token'
