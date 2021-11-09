@@ -22,7 +22,7 @@ module Dingtalk
           sns_app_secret,
           timestamp.to_s
         )
-        signature = ERB::Util.url_encode Base64.encode64(sign_str).strip
+        signature = Base64.encode64(sign_str).strip
         {
           accessKey: sns_app_id,
           timestamp: timestamp,
