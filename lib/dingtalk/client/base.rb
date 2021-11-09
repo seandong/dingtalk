@@ -54,7 +54,7 @@ module Dingtalk
       def init_attrs(*keys)
         keys.each do |key|
           value = options[key]
-          raise Dingtalk::MissingParameterException, "missing parameter: #{k}" if value.nil?
+          raise Dingtalk::MissingParameterException, "missing parameter: #{key}" if value.nil?
 
           instance_variable_set("@#{key}", value)
         end
