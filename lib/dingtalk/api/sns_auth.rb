@@ -1,6 +1,6 @@
 module Dingtalk
   module Api
-    module Sns
+    module SnsAuth
       def authorize_url(redirect_uri, state, scope = 'snsapi_auth')
         redirect_uri = ERB::Util.url_encode(redirect_uri)
         path = URI.join(API_BASE_URL, 'connect/oauth2/sns_authorize')

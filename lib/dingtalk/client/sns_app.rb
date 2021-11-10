@@ -3,7 +3,7 @@ require 'dingtalk/client/base'
 module Dingtalk
   module Client
     class SnsApp < Base
-      api_mount :sns
+      api_mount :sns_auth
 
       attr_reader :app_id, :app_secret
 

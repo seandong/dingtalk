@@ -5,7 +5,7 @@ module Dingtalk
   module Client
     class Suite < Base
       api_mount :service
-      api_mount :sns
+      api_mount :sns_auth
 
       attr_reader :suite_id, :app_id, :suite_key, :suite_secret
 

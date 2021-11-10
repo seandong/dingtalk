@@ -16,7 +16,7 @@ module Dingtalk
       api_mount :role
       api_mount :scenegroup
       api_mount :smartwork
-      api_mount :sns
+      api_mount :sns_auth
       api_mount :sso
       api_mount :user
       api_mount :workrecord
