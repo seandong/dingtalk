@@ -30,8 +30,6 @@ module Dingtalk
         Dingtalk::Client::IsvApp.new(suite: self, corpid: corpid, agent_id: agent_id)
       end
 
-      private
-
       def sns_app_id
         suite_key
       end
@@ -39,6 +37,8 @@ module Dingtalk
       def sns_app_secret
         suite_secret
       end
+
+      private
 
       def access_token_name
         'suite_access_token'

@@ -37,8 +37,6 @@ module Dingtalk
         raise NotImplementedError
       end
 
-      private
-
       def sns_app_id
         raise NotImplementedError
       end
@@ -46,6 +44,8 @@ module Dingtalk
       def sns_app_secret
         raise NotImplementedError
       end
+
+      private
 
       def access_token_name
         'access_token'

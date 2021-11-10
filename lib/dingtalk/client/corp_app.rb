@@ -41,8 +41,6 @@ module Dingtalk
         app_key
       end
 
-      private
-
       def sns_app_id
         app_key
       end
@@ -50,6 +48,8 @@ module Dingtalk
       def sns_app_secret
         app_secret
       end
+
+      private
 
       def token_store
         @token_store ||= Dingtalk::Tokens::CorpAppToken.new(self)
