@@ -3,7 +3,7 @@ require 'dingtalk/client/base'
 module Dingtalk
   module Client
     class SnsApp < Base
-      api_mount :sns
+      api_mount :sns_auth
 
       attr_reader :app_id, :app_secret
 
@@ -14,19 +14,12 @@ module Dingtalk
 
       private
 
-      def signature_params
-        timestamp = (Time.now.to_f * 1000).to_i
-        sign_str = OpenSSL::HMAC.digest(
-          OpenSSL::Digest.new('sha256'),
-          app_secret,
-          timestamp.to_s
-        )
-        signature = ERB::Util.url_encode Base64.encode64(sign_str).strip
-        {
-          accessKey: app_id,
-          timestamp: timestamp,
-          signature: signature
-        }
+      def sns_app_id
+        app_id
+      end
+
+      def sns_app_secret
+        app_secret
       end
     end
   end

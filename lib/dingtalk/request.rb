@@ -97,12 +97,12 @@ module Dingtalk
     attr_reader :code, :data
 
     def initialize(data)
-      @code = data['code'].to_i
+      @code = data['errcode'].to_i
       @data = data
     end
 
     def success?
-      code == 0
+      code.zero?
     end
   end
 end

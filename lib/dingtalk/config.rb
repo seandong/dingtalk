@@ -32,6 +32,7 @@ module Dingtalk
   end
 
   class Config
-    attr_accessor :default_app_id, :default_app_secret, :default_isv, :redis, :http_timeout_options, :logger
+    attr_accessor :default_suite_id, :default_app_id, :default_suite_key, :default_suite_secret,
+                  :redis, :http_timeout_options, :logger
   end
 end

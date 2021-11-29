@@ -1,7 +1,17 @@
 module Dingtalk
   module Api
     module Message
-      def corpconversation_asyncsend_v2(msg:, userid_list: [], dept_id_list: [], to_all_user: false, options: {})
+      def corpconversation_sendbytemplate(template_id:, userid_list: nil, dept_id_list: nil, data: {})
+        post 'topapi/message/corpconversation/sendbytemplate', {
+          agent_id: agent_id,
+          template_id: template_id,
+          userid_list: userid_list,
+          dept_id_list: dept_id_list,
+          data: data
+        }.compact
+      end
+
+      def corpconversation_asyncsend_v2(msg:, userid_list: nil, dept_id_list: nil, to_all_user: false, options: {})
         # https://ding-doc.dingtalk.com/document#/org-dev-guide/send-work-notifications
         post 'topapi/message/corpconversation/asyncsend_v2', {
           agent_id: agent_id,
@@ -9,7 +19,7 @@ module Dingtalk
           dept_id_list: dept_id_list,
           to_all_user: to_all_user,
           msg: msg
-        }.merge(options)
+        }.compact.merge(options)
       end
 
       def corpconversation_getsendprogress(task_id)

@@ -38,18 +38,21 @@ end
 > 回调数据签名和解密：
 
 ```ruby
-# 实例化回调对象
-callback = Dingtalk::Callback.new(
-  encoding_aes_key: encoding_aes_key,
-  token: token,
-  corpid: corpid # 第三方应用使用 SuiteKey
+# 实例化签名对象
+cipher = Dingtalk::Cipher.new(
+  aes_key: encoding_aes_key,      # 数据加密密钥
+  token: token,                   # Token
+  key: appKey/suiteKey            # 自建应用使用 appKey; 第三方应用使用 SuiteKey
 )
 
 # 数据解密
-callback.decrypt(encrypt_str)
+cipher.decrypt(encrypt_str)
 
-# 返回数据签名
-callback.encrypt(message)
+# 数据加密
+cipher.encrypt(text)
+
+# 返回签名数据包
+cipher.signature_package(text)
 ```
 
 ### 实例化套件 (suite)
@@ -91,7 +94,8 @@ app = suite.isv_app(corpid: corpid, agent_id: agent_id)
 app = Dingtalk::Client::CorpApp.new(
   app_key: app_key,
   app_secret: app_secret,
-  agent_id: agent_id
+  agent_id: agent_id,
+  corpid: corpid
 )
 ```
 

@@ -4,11 +4,26 @@ module Dingtalk
   module Client
     class IsvApp < Base
       api_mount :auth
+      api_mount :call_back
+      api_mount :chat
+      api_mount :department
+      api_mount :extcontact
+      api_mount :media
+      api_mount :message
+      api_mount :microapp
+      api_mount :org_union
+      api_mount :robot
+      api_mount :role
+      api_mount :scenegroup
+      api_mount :smartwork
+      api_mount :sso
       api_mount :user
+      api_mount :workrecord
+      api_mount :jsapi
 
-      attr_reader :corpid, :suite
+      attr_reader :corpid, :suite, :agent_id
 
-      delegate :agent_id, :app_id, :suite_id, :suite_key, :suite_secret, :suite_ticket, to: :suite
+      delegate :app_id, :suite_id, :suite_key, :suite_secret, :suite_ticket, to: :suite
 
       def initialize(options = {})
         super

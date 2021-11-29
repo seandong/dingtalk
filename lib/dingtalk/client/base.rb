@@ -37,6 +37,14 @@ module Dingtalk
         raise NotImplementedError
       end
 
+      def sns_app_id
+        raise NotImplementedError
+      end
+
+      def sns_app_secret
+        raise NotImplementedError
+      end
+
       private
 
       def access_token_name
@@ -46,7 +54,7 @@ module Dingtalk
       def init_attrs(*keys)
         keys.each do |key|
           value = options[key]
-          raise Dingtalk::MissingParameterException, "missing parameter: #{k}" if value.nil?
+          raise Dingtalk::MissingParameterException, "missing parameter: #{key}" if value.nil?
 
           instance_variable_set("@#{key}", value)
         end

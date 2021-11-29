@@ -1,3 +1,3 @@
 module Dingtalk
-  VERSION = '1.1.2'.freeze
+  VERSION = '1.1.5'.freeze
 end

@@ -7,7 +7,7 @@ module Dingtalk
       end
 
       def get_user(userid, language: 'zh_CN')
-        # https://ding-doc.dingtalk.com/document#/isv-dev-guide/queries-user-details-new
+        # https://developers.dingtalk.com/document/app/query-user-details
         get 'topapi/v2/user/get', params: { userid: userid, language: language }
       end
 

@@ -5,6 +5,7 @@ module Dingtalk
   module Client
     class Suite < Base
       api_mount :service
+      api_mount :sns_auth
 
       attr_reader :suite_id, :app_id, :suite_key, :suite_secret
 
@@ -25,8 +26,16 @@ module Dingtalk
         token_store.token
       end
 
-      def isv_app(corpid:)
-        Dingtalk::Client::IsvApp.new(suite: self, corpid: corpid)
+      def isv_app(corpid:, agent_id: nil)
+        Dingtalk::Client::IsvApp.new(suite: self, corpid: corpid, agent_id: agent_id)
+      end
+
+      def sns_app_id
+        suite_key
+      end
+
+      def sns_app_secret
+        suite_secret
       end
 
       private
@@ -37,6 +46,17 @@ module Dingtalk
 
       def token_store
         @token_store ||= Dingtalk::Tokens::SuiteToken.new(self)
+      end
+
+      class << self
+        def default
+          @default ||= new(
+            suite_id: Dingtalk.config.default_suite_id,
+            app_id: Dingtalk.config.default_app_id,
+            suite_key: Dingtalk.config.default_suite_key,
+            suite_secret: Dingtalk.config.default_suite_secret
+          )
+        end
       end
     end
   end
