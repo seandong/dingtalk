@@ -4,7 +4,7 @@ module Dingtalk
   module Tokens
     class IsvAppToken < Base
       def redis_key
-        @redis_key ||= Digest::MD5.hexdigest "#{self.class.name}_#{client.corpid}_#{client.app_id}"
+        @redis_key ||= Digest::MD5.hexdigest "#{self.class.name}_#{client.app_id}_#{client.corpid}_#{client.agent_id}"
       end
 
       def fetch_token
