@@ -27,6 +27,14 @@ module Dingtalk
       end
     end
 
+    def put(path, put_body, put_header = {})
+      request(path, put_header) do |url, header|
+        Dingtalk.logger.info "payload: #{put_body}"
+        params = header.delete(:params)
+        http.headers(header).put(url, params: params, json: put_body, ssl_context: ssl_context)
+      end
+    end
+
     def post_file(path, file, post_header={})
       request(path, post_header) do |url, header|
         params = header.delete(:params)
