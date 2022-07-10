@@ -45,7 +45,8 @@ module Dingtalk
     private
 
     def request(path, header={}, &_block)
-      url = URI.join(API_BASE_URL, path)
+      base_url = header.delete(:base_url) || API_BASE_URL
+      url = URI.join(base_url, path)
       Dingtalk.logger.info "request url(#{url}) with headers: #{header}"
       as = header.delete(:as)
       header['Accept'] = 'application/json'

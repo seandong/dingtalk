@@ -2,6 +2,7 @@ require 'logger'
 
 module Dingtalk
   API_BASE_URL = 'https://oapi.dingtalk.com/'.freeze
+  API_BASE_URL_v2 = 'https://api.dingtalk.com/'.freeze
 
   class << self
     def configure
