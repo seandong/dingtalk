@@ -66,7 +66,8 @@ module Dingtalk
 
       def with_token(headers, tries = 2)
         params = headers[:params] || {}
-        params[access_token_name] = access_token
+        token_name = headers.delete(:token_name) || access_token_name
+        params[token_name] = access_token
         headers[:params] = params
         yield headers
       rescue Dingtalk::AccessTokenExpiredError
