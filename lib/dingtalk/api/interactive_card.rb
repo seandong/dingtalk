@@ -47,11 +47,11 @@ module Dingtalk
 
       # https://open.dingtalk.com/document/group/group-session-close-interactive-card-instance-ceiling
       def close_top_box(open_conversation_id:, out_track_id:, cool_app_code:)
-        post '/v1.0/im/topBoxes/close', params.merge(
+        post '/v1.0/im/topBoxes/close', {
           openConversationId: open_conversation_id,
           outTrackId: out_track_id,
           coolAppCode: cool_app_code,
-        ), headers
+        }, headers
       end
 
       private
