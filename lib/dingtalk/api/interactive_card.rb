@@ -8,6 +8,14 @@ module Dingtalk
         )
       end
 
+      # https://open.dingtalk.com/document/isvapp-server/query-group-information
+      def query_group(open_conversation_id:, cool_app_code:)
+        post '/v1.0/im/sceneGroups/query', {
+          openConversationId: open_conversation_id,
+          coolAppCode: cool_app_code,
+        }, headers
+      end
+
       # https://open.dingtalk.com/document/group/send-interactive-dynamic-cards
       def send(card_template_id:, out_track_id:, conversation_type:, card_data:, params: {})
         post '/v1.0/im/interactiveCards/send', params.merge(
