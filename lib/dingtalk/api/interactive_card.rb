@@ -16,6 +16,15 @@ module Dingtalk
         }, headers
       end
 
+      # https://open.dingtalk.com/document/isvapp-server/obtains-the-accessible-status-of-cool-applications
+      def query_cool_app_status(auth_code:, cool_app_code:, open_conversation_id:)
+        post '/v1.0/appMarket/coolApps/accessions/statuses/query', {
+          authCode: auth_code,
+          coolAppCode: cool_app_code,
+          encFieldBizCode: open_conversation_id,
+        }, headers
+      end
+
       # https://open.dingtalk.com/document/group/send-interactive-dynamic-cards
       def send(card_template_id:, out_track_id:, conversation_type:, card_data:, params: {})
         post '/v1.0/im/interactiveCards/send', params.merge(
