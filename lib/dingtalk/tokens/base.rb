@@ -23,7 +23,7 @@ module Dingtalk
         if value.nil?
           Dingtalk.logger.error "#{self.class.name} fetch token error: #{data.inspect}"
         else
-          expires_at = Time.now.to_i + data['expires_in'].to_i - 120
+          expires_at = Time.now.to_i + data[expires_key].to_i - 120
           redis.hmset(
             redis_key,
             key, value,
@@ -51,6 +51,10 @@ module Dingtalk
 
       def redis
         Dingtalk.redis
+      end
+
+      def expires_key
+        'expires_in'
       end
 
       def expired?

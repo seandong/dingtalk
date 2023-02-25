@@ -20,6 +20,7 @@ module Dingtalk
       api_mount :user
       api_mount :workrecord
       api_mount :jsapi
+      api_mount :interactive_card
 
       attr_reader :corpid, :suite, :agent_id
 
