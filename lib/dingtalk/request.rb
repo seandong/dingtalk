@@ -67,6 +67,7 @@ module Dingtalk
     end
 
     def handle_response(response, as)
+      Dingtalk.logger.info "Dingtalk response header: #{response.headers}"
       content_type = response.headers[:content_type]
       parse_as = {
         %r{^application\/json} => :json,
@@ -85,7 +86,7 @@ module Dingtalk
     end
 
     def parse_as_json(body)
-      Dingtalk.logger.info "response body: #{body}"
+      Dingtalk.logger.info "Dingtalk response body: #{body}"
       data = JSON.parse body.to_s
       result = Result.new(data)
       raise ::Dingtalk::AccessTokenExpiredError if [99991663, 99991664].include?(result.code)
