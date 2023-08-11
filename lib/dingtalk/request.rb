@@ -67,7 +67,7 @@ module Dingtalk
     end
 
     def handle_response(response, as)
-      Dingtalk.logger.info "Dingtalk response header: #{response.headers}"
+      Dingtalk.logger.info "Dingtalk response header: #{response.headers.to_h}"
       content_type = response.headers[:content_type]
       parse_as = {
         %r{^application\/json} => :json,
